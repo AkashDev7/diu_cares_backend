@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Complain } from './schemas/complain.schema';
 import * as mongoose from 'mongoose';
 import { NotFoundError } from 'rxjs';
+import { User } from '../auth/schemas/user.schema';
 
 import { Query } from 'express-serve-static-core';
 
@@ -31,8 +32,11 @@ export class ComplainService {
         return complains
     }
 
-    async create(complain: Complain): Promise<Complain>{
-        const res = await this.complainModel.create(complain)
+    async create(complain: Complain, user: User): Promise<Complain>{
+
+        const data = Object.assign(complain, { user: user._id})
+
+        const res = await this.complainModel.create(data)
         return res
     }
 

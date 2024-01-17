@@ -13,7 +13,9 @@ export class AuthController {
         return this.authService.signUp(signUpDto);
     }
 
-    @Get('/login')
+    //CHNAGED FORM 'get' TO 'post' REQUEST TYPE
+
+    @Post('/login')
     login(@Body() logInDto: LogInDto): Promise<{ token: string }> {
         return this.authService.login(logInDto);
     }

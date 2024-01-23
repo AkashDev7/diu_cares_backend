@@ -26,10 +26,15 @@ export class AuthService {
             email,
             password: hashedPassword
         });
-
-        const token =  this.jwtService.sign({ id: user._id});
-
-        return { token };
+        const tokenData = {
+            name: user.name,
+            email: user.email,
+            role: user.role,
+          };
+      
+          const token = this.jwtService.sign(tokenData);
+      
+          return { token };
     }
 
     async login(logInDto : LogInDto): Promise<{ token: string }> {
@@ -47,8 +52,14 @@ export class AuthService {
             throw new UnauthorizedException('Invalid password');
         }
 
-        const token =  this.jwtService.sign({id: user._id});
-
-        return { token };
+        const tokenData = {
+            name: user.name,
+            email: user.email,
+            role: user.role,
+          };
+      
+          const token = this.jwtService.sign(tokenData);
+      
+          return { token };
     }
 }

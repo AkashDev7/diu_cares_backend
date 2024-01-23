@@ -27,6 +27,7 @@ export class AuthService {
             password: hashedPassword
         });
         const tokenData = {
+            id: user._id,
             name: user.name,
             email: user.email,
             role: user.role,
@@ -53,6 +54,7 @@ export class AuthService {
         }
 
         const tokenData = {
+            id: user._id,
             name: user.name,
             email: user.email,
             role: user.role,
